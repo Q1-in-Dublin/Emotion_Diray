@@ -16,9 +16,9 @@ import './App.css';
 // 4. "/edit" : edit a dirary
 
 const mockData = [
-    { id: 1, createDate: new Date().getTime(), emotionId: 1, content: 'Diary no1' },
-    { id: 2, createDate: new Date().getTime(), emotionId: 4, content: 'Diary no2' },
-    { id: 3, createDate: new Date().getTime(), emotionId: 1, content: 'Diary no1' },
+    { id: 1, createdDate: new Date('07-22-2024').getTime(), emotionId: 1, content: 'Diary no1' },
+    { id: 2, createdDate: new Date('07-21-2024').getTime(), emotionId: 4, content: 'Diary no2' },
+    { id: 3, createdDate: new Date('06-21-2024').getTime(), emotionId: 3, content: 'Diary no3' },
 ];
 function reducer(state, action) {
     switch (action.type) {
@@ -32,8 +32,8 @@ function reducer(state, action) {
             return state;
     }
 }
-const DiaryStateContext = createContext();
-const DiaryDispatchContext = createContext();
+export const DiaryStateContext = createContext();
+export const DiaryDispatchContext = createContext();
 function App() {
     const [data, dispatch] = useReducer(reducer, mockData);
     const idRef = useRef(3);

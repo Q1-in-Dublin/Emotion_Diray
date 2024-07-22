@@ -1,19 +1,21 @@
 import { getEmotionImage } from '../util/get-emotion-image';
+import { useNavigate } from 'react-router-dom';
 import Button from './Button';
 import './DiaryItems.css';
-const DiaryItems = () => {
-    const emotionId = 1;
+const DiaryItems = ({ id, emotionId, createdDate, content }) => {
+    const nav = useNavigate();
+
     return (
         <div className="Diary_Item">
-            <div className={`img_section img_section_${emotionId}`}>
-                <img src={getEmotionImage(1)} />
+            <div onClick={() => nav(`/diary/${id}`)} className={`img_section img_section_${emotionId}`}>
+                <img src={getEmotionImage(emotionId)} />
             </div>
-            <div className="info_section">
-                <div className="created_date">{new Date().toLocaleDateString()}</div>
-                <div className="content">Diary Content</div>
+            <div onClick={() => nav(`/diary/${id}`)} className="info_section">
+                <div className="created_date">{new Date(createdDate).toLocaleDateString()}</div>
+                <div className="content">{content}</div>
             </div>
             <div className="button_section">
-                <Button text={'Edit'} />
+                <Button onClick={() => nav(`/edit/${id}`)} text={'Edit'} />
             </div>
         </div>
     );
