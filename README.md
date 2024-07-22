@@ -10,4 +10,4 @@ The Emotion Diary project aims to assist users in recording their daily events a
 ## Development Process
 - **17th July**: Repository created.
 - **21st July**: Initial setup, component creation, CSS setup.
-- **22nd July**: Implementation of common components, README.md added. Reducer, createContext
+- **22nd July**: Implementation of common components, README.md added. Reducer, createContext,DiaryList
