@@ -62,22 +62,6 @@ function App() {
     };
     return (
         <>
-            <button onClick={() => createDiary(new Date().getTime(), 1, 'Hello')}>Diary creat test</button>
-            <button
-                onClick={() => {
-                    console.log('clicked');
-                    editDirary(1, new Date().getTime(), 3, 'edited diary');
-                }}
-            >
-                Editing diary test
-            </button>
-            <button
-                onClick={() => {
-                    deleteDiary(1);
-                }}
-            >
-                Delete diary test
-            </button>
             <DiaryStateContext.Provider value={data}>
                 <DiaryDispatchContext.Provider value={{ createDiary, editDirary, deleteDiary }}>
                     <Routes>
