@@ -4,11 +4,13 @@ import Header from '../components/Header';
 import Button from '../components/Button';
 import DiaryList from '../components/DiaryList';
 
+//Defined outside of the component to simplify and make readable code
 const getMonthlyData = (pivotDate, data) => {
     const beginTime = new Date(pivotDate.getFullYear(), pivotDate.getMonth(), 1, 0, 0, 0).getTime();
     const endTime = new Date(pivotDate.getFullYear(), pivotDate.getMonth() + 1, 0, 23, 59, 59).getTime();
     console.log(beginTime);
     console.log(endTime);
+    //Filter this month's diary
     return data.filter((item) => beginTime <= item.createdDate && item.createdDate <= endTime);
 };
 
@@ -42,6 +44,7 @@ const Home = () => {
     const currentMonthName = monthNames[pivotDate.getMonth()];
     const currentYear = pivotDate.getFullYear();
 
+    //When press the button for moving a month
     const onIncreaseMonth = () => {
         setPivotDate(new Date(pivotDate.getFullYear(), pivotDate.getMonth() + 1, 1));
     };
@@ -51,6 +54,7 @@ const Home = () => {
     };
 
     return (
+        // Button Recycle
         <div>
             <Header
                 title={`${currentMonthName} ${currentYear}`}

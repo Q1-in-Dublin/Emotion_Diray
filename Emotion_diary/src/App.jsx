@@ -35,6 +35,10 @@ function reducer(state, action) {
 export const DiaryStateContext = createContext();
 export const DiaryDispatchContext = createContext();
 function App() {
+    //data statue in the APP.jsx? we want to use the data in the every page
+    //give and take data among components use props / context. It's one way from the parent to children
+
+    //Data
     const [data, dispatch] = useReducer(reducer, mockData);
     const idRef = useRef(3);
 
@@ -62,6 +66,7 @@ function App() {
     };
     return (
         <>
+            {/* To provide data states to the components for preventing Props Drilling  Props drilling?=> don't pass it just give it directly*/}
             <DiaryStateContext.Provider value={data}>
                 <DiaryDispatchContext.Provider value={{ createDiary, editDirary, deleteDiary }}>
                     <Routes>
