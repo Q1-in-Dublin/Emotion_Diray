@@ -6,10 +6,7 @@ The Emotion Diary project aims to assist users in recording their daily events a
 ## Features
 - Mood tracking divided into five levels: Very Bad, Bad, Neutral, Good, Very Good.
 - Allows users to log the date, their mood, and detailed diary entries.
-- Write a diary with voice ( Need to check API)
-- Recommend comfort songs or sentences for users
-- Implement as a localStorage > expand it to bigger DB
-- Make a Sign in and Sign up feature.
+
 
 ## Data Storage Process
   - Used LocalStorage : It stores data by site address and it can be stored before the user deletes it.
@@ -18,6 +15,12 @@ The Emotion Diary project aims to assist users in recording their daily events a
 ### Future plans for the storage
 1. Maintain data through Json file
 2. NoSQL DB
+
+## Future Work plan
+- Write a diary with voice ( Need to check API)
+- Recommend comfort songs or sentences for users
+- Implement as a localStorage > expand it to bigger DB
+- Make a Sign in and Sign up feature.
 
 ## Development Process
 - **17th July**: Repository created.
