@@ -12,7 +12,7 @@ The Emotion Diary project aims to assist users in recording their daily events a
 ## Data Storage Process
   - Used LocalStorage : It stores data by site address and it can be stored before the user deletes it.
 ### Possibility to use another storage
-  - SessionStoreage : It stores data  by browser tab, maintain data before the tab is closed(reload), the data will be deleted when the tab is closed or the browser is shut down.
+  - SessionStoreage : It stores data by browser tab, maintain data before the tab is closed(reload), the data will be deleted when the tab is closed or the browser is shut down.
 ### Future plans for the storage
 1. Maintain data through Json file
 2. NoSQL DB
