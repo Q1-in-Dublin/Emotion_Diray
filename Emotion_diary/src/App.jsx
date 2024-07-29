@@ -1,4 +1,4 @@
-import { useReducer, useRef, createContext } from 'react';
+import { useReducer, useRef, createContext, useEffect, useState } from 'react';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Diary from './pages/Diary';
@@ -15,41 +15,80 @@ import './App.css';
 //3. /dirary : detail
 // 4. "/edit" : edit a dirary
 
-const mockData = [
-    { id: 1, createdDate: new Date('07-22-2024').getTime(), emotionId: 1, content: 'Diary no1' },
-    { id: 2, createdDate: new Date('07-21-2024').getTime(), emotionId: 4, content: 'Diary no2' },
-    { id: 3, createdDate: new Date('06-21-2024').getTime(), emotionId: 3, content: 'Diary no3' },
-];
 function reducer(state, action) {
+    let nextState;
     switch (action.type) {
-        case 'CREATE':
-            return [action.data, ...state];
-        case 'UPDATE':
-            return state.map((item) => (String(item.id) === String(action.data.id) ? action.data : item));
-        case 'DELETE':
-            return state.filter((item) => String(item.id) !== String(action.id));
+        case 'INIT':
+            return action.data;
+        case 'CREATE': {
+            nextState = [action.data, ...state];
+            break;
+        }
+
+        case 'UPDATE': {
+            nextState = state.map((item) => (String(item.id) === String(action.data.id) ? action.data : item));
+            break;
+        }
+
+        case 'DELETE': {
+            nextState = state.filter((item) => String(item.id) !== String(action.id));
+            break;
+        }
         default:
             return state;
     }
+    localStorage.setItem('diary', JSON.stringify(nextState));
+    return nextState;
 }
 export const DiaryStateContext = createContext();
 export const DiaryDispatchContext = createContext();
 function App() {
     //data statue in the APP.jsx? we want to use the data in the every page
     //give and take data among components use props / context. It's one way from the parent to children
-
     //Data
-    const [data, dispatch] = useReducer(reducer, mockData);
-    const idRef = useRef(3);
+    const [isLoading, setIsLoading] = useState(true);
+    const [data, dispatch] = useReducer(reducer, []);
+    const idRef = useRef(0);
 
-    //Action Object
+    useEffect(() => {
+        const storedData = localStorage.getItem('diary');
+        if (!storedData) {
+            setIsLoading(false);
+            return;
+        }
+        const parsedData = JSON.parse(storedData);
+        if (!Array.isArray(parsedData)) {
+            setIsLoading(false);
+            return;
+        }
+        let maxId = 0;
+        parsedData.forEach((item) => {
+            if (Number(item.id) > maxId) {
+                maxId = Number(item.id);
+            }
+        });
+        idRef.current = maxId + 1;
+
+        dispatch({
+            type: 'INIT',
+            data: parsedData,
+        });
+        setIsLoading(false);
+    }, []);
+
+    /* LocalStorage */
+    //localStorage.setItem('test', 'hello');
+    //localStorage.setItem('person', JSON.stringify({ name: 'Gyuwon' }));
+
+    localStorage.getItem;
+    /* Action Object */
     //Add diary
-    const createDiary = (createDate, emotionId, content) => {
+    const createDiary = (createdDate, emotionId, content) => {
         dispatch({
             type: 'CREATE',
             data: {
                 id: idRef.current++,
-                createDate,
+                createdDate,
                 emotionId,
                 content,
             },
@@ -64,6 +103,9 @@ function App() {
     const deleteDiary = (id) => {
         dispatch({ type: 'DELETE', id });
     };
+    if (isLoading) {
+        return <div>Data is loading ...</div>;
+    }
     return (
         <>
             {/* To provide data states to the components for preventing Props Drilling  Props drilling?=> don't pass it just give it directly*/}

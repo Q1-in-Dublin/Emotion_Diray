@@ -4,9 +4,11 @@ import Button from '../components/Button';
 import Viewer from '../components/Viewer';
 import useDiary from '../hooks/useDiary';
 import { getStringifiedDate } from '../util/getStringifiedDate';
+import usePageTitle from '../hooks/usePageTitle';
 const Diary = (p) => {
     const params = useParams();
     const nav = useNavigate();
+    usePageTitle(`${params.id} Diary`);
     const curDiaryItem = useDiary(params.id);
     if (!curDiaryItem) {
         return <div>Data Loading!</div>;
