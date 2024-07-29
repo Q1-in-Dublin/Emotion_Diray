@@ -35,4 +35,4 @@ The Emotion Diary project aims to assist users in recording their daily events a
 <img width="1400" alt="Screenshot 2024-07-28 at 22 52 44" src="https://github.com/user-attachments/assets/35345381-f70b-4cb2-bf79-3e8066c948b9">
 <img width="1376" alt="Screenshot 2024-07-28 at 22 52 53" src="https://github.com/user-attachments/assets/9d9dd337-f2d7-4623-87c8-440b06e23ab3">
 
-- **28th July**: Implementation of View page , localstorage"
+- **28th July**: Implementation of View page , localstorage, favicon, deploy"
