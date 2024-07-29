@@ -4,20 +4,13 @@ import Button from '../components/Button';
 import Editor from '../components/Editor';
 import { useContext, useEffect, useState } from 'react';
 import { DiaryDispatchContext, DiaryStateContext } from '../App';
+import useDiary from '../hooks/useDiary';
 const Edit = () => {
     const params = useParams();
     const nav = useNavigate();
     const { deleteDiary, editDirary } = useContext(DiaryDispatchContext);
-    const data = useContext(DiaryStateContext);
-    const [curDiaryItem, setCurDiaryItem] = useState();
-    useEffect(() => {
-        const currentDiaryItem = data.find((item) => String(item.id) === String(params.id));
-        if (!currentDiaryItem) {
-            window.alert('Not exist diary');
-            nav('/', { replace: true });
-        }
-        setCurDiaryItem(currentDiaryItem);
-    }, [params.id, data]);
+    const curDiaryItem = useDiary(params.id);
+
     //Current diary
     const onClickDelete = () => {
         if (window.confirm('Are you sure to delete a diary?')) {
