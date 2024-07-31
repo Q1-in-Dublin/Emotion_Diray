@@ -8,6 +8,7 @@ import Edit from './pages/Edit';
 import { getEmotionImage } from './util/get-emotion-image';
 import Button from './components/Button';
 import Header from './components/Header';
+import { Analytics } from '@vercel/analytics/react';
 import './App.css';
 
 //1. "/" get every dirary
@@ -24,12 +25,10 @@ function reducer(state, action) {
             nextState = [action.data, ...state];
             break;
         }
-
         case 'UPDATE': {
             nextState = state.map((item) => (String(item.id) === String(action.data.id) ? action.data : item));
             break;
         }
-
         case 'DELETE': {
             nextState = state.filter((item) => String(item.id) !== String(action.id));
             break;
@@ -40,8 +39,10 @@ function reducer(state, action) {
     localStorage.setItem('diary', JSON.stringify(nextState));
     return nextState;
 }
+
 export const DiaryStateContext = createContext();
 export const DiaryDispatchContext = createContext();
+
 function App() {
     //data statue in the APP.jsx? we want to use the data in the every page
     //give and take data among components use props / context. It's one way from the parent to children
@@ -103,9 +104,11 @@ function App() {
     const deleteDiary = (id) => {
         dispatch({ type: 'DELETE', id });
     };
+
     if (isLoading) {
         return <div>Data is loading ...</div>;
     }
+
     return (
         <>
             {/* To provide data states to the components for preventing Props Drilling  Props drilling?=> don't pass it just give it directly*/}
@@ -120,6 +123,7 @@ function App() {
                     </Routes>
                 </DiaryDispatchContext.Provider>
             </DiaryStateContext.Provider>
+            <Analytics />
         </>
     );
 }
